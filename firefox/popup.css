@@ -1,0 +1,191 @@
+body {
+    background-color: rgb(24, 24, 31);
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    width: 250px;
+    padding: 10px;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+
+.titlecont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+}
+
+.title {
+    font-size: 20px;
+    color: rgb(221, 182, 197);
+    margin: 0;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.refresh {
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    padding :13px 0 13px 0;
+    transition: background-color 0.3s;
+}
+
+.refresh:hover {
+    background-color: rgb(49, 49, 60);
+}
+
+.refresh:disabled {
+    background-color: rgb(35, 35, 43);
+    cursor: not-allowed;
+}
+
+.refresh-icon {
+    color: #ffffff;
+}
+
+.refresh:disabled .refresh-icon {
+    opacity: 0.5;
+}
+
+.streams {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.stream {
+    padding: 10px;
+    margin-top: 7px;
+    border-radius: 10px;
+    background-color: rgb(39, 39, 50);
+    color: rgb(221, 182, 197);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.stream:hover {
+    background-color: rgb(49, 49, 60);
+}
+
+.hdr::before {
+    content: "HDR";
+    position: absolute;
+    top: 50%;
+    right: 2em;
+    transform: translateY(-50%);
+    background-color: #ffcc00;
+    color: #000;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+}
+
+.eightk::after {
+    content: "8K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.fourk::after {
+    content: "4K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.twok::after {
+    content: "2K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.fhd::after {
+    content: "FHD";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.hd::after {
+    content: "HD";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.audio::after {
+    content: "Audio";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.message {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.videoid {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0 5px 0;
+    text-align: center;
+}

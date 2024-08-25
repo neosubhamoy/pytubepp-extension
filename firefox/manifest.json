@@ -1,0 +1,30 @@
+{
+    "name": "PytubePP Addon (FOSS)",
+    "description": "Download your Favourite YouTube Videos Effortlessly using Pytube Post Processor CLI",
+    "version": "0.1.0",
+    "manifest_version": 2,
+    "permissions": [
+        "tabs",
+        "storage",
+        "nativeMessaging",
+        "https://*.youtube.com/*"
+    ],
+    "icons": {
+        "16": "assets/logo/pytubepp-16.png",
+        "48": "assets/logo/pytubepp-48.png",
+        "128": "assets/logo/pytubepp-128.png"
+    },
+    "browser_action": {
+        "default_title": "PytubePP Addon (FOSS)",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["utils.js", "background.js"]
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "pytubepp-addon@neosubhamoy.com"
+        }
+    }
+
+}
