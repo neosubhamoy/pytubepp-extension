@@ -1,3 +1,5 @@
+![PytubePPExtension](./assets/images/pytubepp-extension.png)
+
 # PytubePP Extension
 
 A Chrome/Firefox Extention/Addon to Download your Favourite YouTube Videos Effortlessly using Pytube Post Processor CLI
@@ -7,6 +9,25 @@ A Chrome/Firefox Extention/Addon to Download your Favourite YouTube Videos Effor
 [![PRs](https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat)](https://github.com/neosubhamoy/pytubepp-extension)
 
 #### **🌟 Loved this Project? Don't forget to Star this Repo to show us your appreciation !!**
+
+### 💻 Supported Platforms
+
+- Windows 10 (v1803 or later)/11
+- Linux (Coming Soon)
+- MacOS (Maybe later :)
+
+### 📎 Pre-Requirements
+
+- [Python (>3.8)](https://www.python.org/downloads/)
+- [FFmpeg](https://www.ffmpeg.org)
+- [PytubePP](https://github.com/neosubhamoy/pytubepp)
+- [PytubePP Helper (Previous requirements can be installed using it)](https://github.com/neosubhamoy/pytubepp-helper)
+
+### ⬇️ Download and Installation
+
+[![MozillaAddon](./assets/images/mozilla-addon.png)](https://addons.mozilla.org/en-US/firefox/addon/pytubepp-addon/)
+
+* You can also download the unsigned raw zip file from the [releases](https://github.com/neosubhamoy/pytubepp-extension/releases/latest) section to import in your browser (for testing only)
 
 ### ⚡ Technologies Used
 

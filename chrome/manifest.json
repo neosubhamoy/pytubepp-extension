@@ -4,9 +4,6 @@
     "version": "0.1.0",
     "manifest_version": 3,
     "permissions": ["tabs","storage","nativeMessaging"],
-    "host_permissions": [
-        "https://*.youtube.com/*"
-    ],
     "icons": {
             "16": "assets/logo/pytubepp-16.png",
             "48": "assets/logo/pytubepp-48.png",
