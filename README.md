@@ -27,7 +27,9 @@ A Chrome/Firefox Extention/Addon to Download your Favourite YouTube Videos Effor
 
 [![MozillaAddon](./assets/images/mozilla-addon.png)](https://addons.mozilla.org/en-US/firefox/addon/pytubepp-addon/)
 
-* You can also download the unsigned raw zip file from the [releases](https://github.com/neosubhamoy/pytubepp-extension/releases/latest) section to import in your browser (for testing only)
+* !! NOT AVAILABLE ON CHROME WEB STORE: Chrome Web Store don't allow extensions which allows YouTube Video Download under [Blue Zinc](https://developer.chrome.com/docs/webstore/troubleshooting/#prohibited-products) guidelines. So, PytubePP Extension is not officially available on Chrome Web Store. If you are a Chrome user then you need to manually download the latest '.crx' file for chrome from [releases](https://github.com/neosubhamoy/pytubepp-extension/releases/latest) section and [sideload](https://stackoverflow.com/a/11879334) it.
+
+* You can also download the unsigned raw zip file from the [releases](https://github.com/neosubhamoy/pytubepp-extension/releases/latest) section to import in your browser (only for testing pourposes)
 
 ### ⚡ Technologies Used
 
