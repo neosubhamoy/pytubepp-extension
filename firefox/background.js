@@ -43,7 +43,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
             })
             .catch(function(error) {
                 console.error('Error for tab', tabId, ':', error);
-                return updateTabInfo(tabId, null, null, 'Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing');
+                return updateTabInfo(tabId, null, null, 'failedToFetchVideoInfo');
             })
             .then(function() {
                 browser.runtime.sendMessage({action: "newDataAvailable", tabId: tabId});
@@ -131,7 +131,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     })
                     .catch(function(error) {
                         console.error('Error for tab', tabId, ':', error);
-                        return updateTabInfo(tabId, null, null, 'Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing');
+                        return updateTabInfo(tabId, null, null, 'failedToFetchVideoInfo');
                     })
                     .then(function() {
                         browser.runtime.sendMessage({action: "newDataAvailable", tabId: tabId});

@@ -425,3 +425,39 @@ background: rgb(221, 182, 197);
     margin: 10px 0;
     animation: rotate360 1s linear infinite;
 }
+
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.error h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+.error h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: rgb(221, 182, 197);
+}
+
+.error h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+}
+
+.error ul {
+    font-size: 12px;
+    padding: 0 0 0 25px;
+}
+
+a {
+    color: rgb(221, 182, 197);
+}

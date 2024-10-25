@@ -48,7 +48,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
             })
             .catch(error => {
                 console.error('Error for tab', tabId, ':', error);
-                return updateTabInfo(tabId, null, null, 'Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing');
+                return updateTabInfo(tabId, null, null, 'failedToFetchVideoInfo');
             })
             .then(() => {
                 // Always notify the popup, even if there's an error
@@ -143,7 +143,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     })
                     .catch(error => {
                         console.error('Error for tab', tabId, ':', error);
-                        return updateTabInfo(tabId, null, null, 'Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing');
+                        return updateTabInfo(tabId, null, null, 'failedToFetchVideoInfo');
                     })
                     .then(() => {
                         // Always notify the popup, even if there's an error

@@ -15,7 +15,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (error) {
-            streamsDiv.appendChild(createElementWithText('p', error, 'message'));
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+
+            const h2 = document.createElement('h2');
+            h2.textContent = 'Oops!';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = 'Failed to fetch video info';
+
+            const hr = document.createElement('hr');
+            hr.className = 'devider';
+
+            const h5 = document.createElement('h5');
+            h5.textContent = 'Possible Solutions';
+
+            const ul = document.createElement('ul');
+
+            const solutions = [
+                'Just try again refreshing',
+                ['Make sure ', 'PytubePP Helper', 'https://github.com/neosubhamoy/pytubepp-helper', ' app is installed and running in the background'],
+                'Make sure you are not changing videos too frequently'
+            ];
+
+            solutions.forEach(solution => {
+                const li = document.createElement('li');
+                if (Array.isArray(solution)) {
+                    li.appendChild(document.createTextNode(solution[0]));
+                    const link = document.createElement('a');
+                    link.href = solution[2];
+                    link.target = '_blank';
+                    link.textContent = solution[1];
+                    li.appendChild(link);
+                    li.appendChild(document.createTextNode(solution[3]));
+                } else {
+                    li.textContent = solution;
+                }
+                ul.appendChild(li);
+            });
+
+            while (streamsDiv.firstChild) {
+                streamsDiv.removeChild(streamsDiv.firstChild);
+            }
+
+            errorDiv.appendChild(h2);
+            errorDiv.appendChild(h3);
+            errorDiv.appendChild(hr);
+            errorDiv.appendChild(h5);
+            errorDiv.appendChild(ul);
+            streamsDiv.appendChild(errorDiv);
         } else if (streamInfo && streamInfo.streams.length > 0) {
             const urlParameters = new URLSearchParams(new URL(url).search);
             const videoId = urlParameters.get("v");
@@ -128,7 +176,55 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.id = 'popup';
             streamsDiv.appendChild(popup);
         } else {
-            streamsDiv.appendChild(createElementWithText('p', 'Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing', 'message'));
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+
+            const h2 = document.createElement('h2');
+            h2.textContent = 'Oops!';
+
+            const h3 = document.createElement('h3');
+            h3.textContent = 'Failed to fetch video info';
+
+            const hr = document.createElement('hr');
+            hr.className = 'devider';
+
+            const h5 = document.createElement('h5');
+            h5.textContent = 'Possible Solutions';
+
+            const ul = document.createElement('ul');
+
+            const solutions = [
+                'Just try again refreshing',
+                ['Make sure ', 'PytubePP Helper', 'https://github.com/neosubhamoy/pytubepp-helper', ' app is installed and running in the background'],
+                'Make sure you are not changing videos too frequently'
+            ];
+
+            solutions.forEach(solution => {
+                const li = document.createElement('li');
+                if (Array.isArray(solution)) {
+                    li.appendChild(document.createTextNode(solution[0]));
+                    const link = document.createElement('a');
+                    link.href = solution[2];
+                    link.target = '_blank';
+                    link.textContent = solution[1];
+                    li.appendChild(link);
+                    li.appendChild(document.createTextNode(solution[3]));
+                } else {
+                    li.textContent = solution;
+                }
+                ul.appendChild(li);
+            });
+
+            while (streamsDiv.firstChild) {
+                streamsDiv.removeChild(streamsDiv.firstChild);
+            }
+
+            errorDiv.appendChild(h2);
+            errorDiv.appendChild(h3);
+            errorDiv.appendChild(hr);
+            errorDiv.appendChild(h5);
+            errorDiv.appendChild(ul);
+            streamsDiv.appendChild(errorDiv);
         }
     }
 

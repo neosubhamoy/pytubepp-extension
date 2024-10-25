@@ -7,7 +7,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateUI(streamInfo, url, tabId, error) {
         streamsDiv.innerHTML = "";
         if (error) {
-            streamsDiv.innerHTML = `<p class='message'>${error}</p>`;
+            streamsDiv.innerHTML = `
+            <div class="error">
+                <h2>Oops!</h2>
+                <h3>Failed to fetch video info</h3>
+                <hr class="devider">
+                <h5>Possible Solutions</h5>
+                <ul>
+                    <li>Just try again refreshing</li>
+                    <li>Make sure <a href="https://github.com/neosubhamoy/pytubepp-helper" target="_blank">PytubePP Helper</a> app is installed and running in the background</li>
+                    <li>Make sure you are not changing videos too frequently</li>
+                </ul>
+            </div>
+            `;
         } else if (streamInfo && streamInfo.streams.length > 0) {
             const urlParameters = new URLSearchParams(new URL(url).search);
             const videoId = urlParameters.get("v");
@@ -74,7 +86,19 @@ document.addEventListener('DOMContentLoaded', function() {
             popup.id = 'popup';
             streamsDiv.appendChild(popup);
         } else {
-            streamsDiv.innerHTML = "<p class='message'>Failed to fetch video stream information. Make sure PytubePP Helper is installed and running or try again refreshing</p>";
+            streamsDiv.innerHTML = `
+            <div class="error">
+                <h2>Oops!</h2>
+                <h3>Failed to fetch video info</h3>
+                <hr class="devider">
+                <h5>Possible Solutions</h5>
+                <ul>
+                    <li>Just try again refreshing</li>
+                    <li>Make sure <a href="https://github.com/neosubhamoy/pytubepp-helper" target="_blank">PytubePP Helper</a> app is installed and running in the background</li>
+                    <li>Make sure you are not changing videos too frequently</li>
+                </ul>
+            </div>
+            `;
         }
     }
 
