@@ -34,7 +34,7 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
                 if (response.status === 'error') {
                     throw new Error(response.message);
                 }
-                var streamInfo = response ? processVideoStreams(JSON.parse(response)) : null;
+                var streamInfo = response ? JSON.parse(response) : null;
                 console.log('Available Streams for tab', tabId, ':', streamInfo);
                 return updateTabInfo(tabId, streamInfo, tab.url);
             })
@@ -121,7 +121,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                         if (response.status === 'error') {
                             throw new Error(response.message);
                         }
-                        var streamInfo = response ? processVideoStreams(JSON.parse(response)) : null;
+                        var streamInfo = response ? JSON.parse(response) : null;
                         console.log('Available Streams for tab', tabId, ':', streamInfo);
                         return updateTabInfo(tabId, streamInfo, tab.url);
                     })

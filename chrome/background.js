@@ -1,4 +1,4 @@
-import {sendMessageToNativeHost, storeData, processVideoStreams} from './utils.js';
+import {sendMessageToNativeHost, storeData} from './utils.js';
 
 // Object to store stream info and URL for each tab
 const tabStreamInfo = {};
@@ -38,7 +38,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
                 if (response.status === 'error') {
                     throw new Error(response.message);
                 }
-                const streamInfo = response ? processVideoStreams(JSON.parse(response)) : null;
+                const streamInfo = response ? JSON.parse(response) : null;
                 console.log('Available Streams for tab', tabId, ':', streamInfo);
                 return updateTabInfo(tabId, streamInfo, tab.url);
             })
@@ -132,7 +132,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         if (response.status === 'error') {
                             throw new Error(response.message);
                         }
-                        const streamInfo = response ? processVideoStreams(JSON.parse(response)) : null;
+                        const streamInfo = response ? JSON.parse(response) : null;
                         console.log('Available Streams for tab', tabId, ':', streamInfo);
                         return updateTabInfo(tabId, streamInfo, tab.url);
                     })
