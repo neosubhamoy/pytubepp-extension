@@ -9,12 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Checkout repository
-      uses: actions/checkout@v2
-
-    - name: 📎Test Variables
-      run: |
-        echo ${{github.ref_name}}
-        echo ${{github.event.repository.name}}
+      uses: actions/checkout@v4
 
     - name: 📦 Install dependencies
       run: |
@@ -24,4 +19,17 @@ jobs:
       run: |
         7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip chrome/*
         7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip firefox/*
+
+    - name: 🚀 Release on GitHub
+      uses: softprops/action-gh-release@v2
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        name: ${{github.event.repository.name}}-${{github.ref_name}}
+        body_path: CHANGELOG.md
+        files: |
+          ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip
+          ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip
+        draft: false
+        prerelease: false
+        make_latest: true
       
