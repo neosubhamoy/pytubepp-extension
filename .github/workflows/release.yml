@@ -18,6 +18,7 @@ jobs:
     - name: 🛠️ Build archives
       run: |
         7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip chrome/*
+        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chromium.zip chromium/*
         7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip firefox/*
 
     - name: 🚀 Release on GitHub
@@ -28,6 +29,7 @@ jobs:
         body_path: CHANGELOG.md
         files: |
           ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip
+          ${{github.event.repository.name}}-${{github.ref_name}}-chromium.zip
           ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip
         draft: false
         prerelease: false

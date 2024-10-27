@@ -1,0 +1,463 @@
+body {
+    background-color: rgb(24, 24, 31);
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+::-webkit-scrollbar-track {
+background: rgb(24, 24, 31);
+}
+
+::-webkit-scrollbar-thumb {
+background: rgb(39, 39, 50);
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: rgb(221, 182, 197);
+}
+
+.container {
+    width: 250px;
+    padding: 10px;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px 0;
+}
+
+.titlecont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+}
+
+.title {
+    font-size: 20px;
+    color: rgb(221, 182, 197);
+    margin: 0;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.refresh {
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    padding :13px 0 13px 0;
+    transition: background-color 0.3s;
+}
+
+.refresh:hover {
+    background-color: rgb(49, 49, 60);
+}
+
+.refresh:disabled {
+    background-color: rgb(35, 35, 43);
+    cursor: not-allowed;
+}
+
+.refresh-icon {
+    color: #ffffff;
+}
+
+.refresh:disabled .refresh-icon {
+    opacity: 0.5;
+}
+
+.streams {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.stream {
+    padding: 10px;
+    margin-top: 7px;
+    border-radius: 10px;
+    background-color: rgb(39, 39, 50);
+    color: rgb(221, 182, 197);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.stream:hover {
+    background-color: rgb(49, 49, 60);
+}
+
+.hdr::before {
+    content: "HDR";
+    position: absolute;
+    top: 50%;
+    right: 2em;
+    transform: translateY(-50%);
+    background-color: #ffcc00;
+    color: #000;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+}
+
+.eightk::after {
+    content: "8K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.fourk::after {
+    content: "4K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.twok::after {
+    content: "2K";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.fhd::after {
+    content: "FHD";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.hd::after {
+    content: "HD";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.audio::after {
+    content: "Audio";
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.message {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+.videoid {
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0 5px 0;
+    text-align: center;
+}
+
+.videopreview {
+    margin: 5px 0 5px 0;
+    position: relative;
+}
+
+.videopreview::before {
+    content: "00:00";
+    position: absolute;
+    bottom: 0.1em;
+    right: 1em;
+    transform: translateY(-50%);
+    background-color: #131313ac;
+    color: #eaeaea;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.2em 0.5em;
+    border-radius: 0.3em;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.previewwrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000a0;
+    backdrop-filter: blur(0px);
+    border-radius: 10px;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+}
+
+.videopreview:hover .previewwrapper {
+    opacity: 1;
+    backdrop-filter: blur(1.5px);
+}
+
+.videopreview:hover::before {
+    opacity: 0;
+}
+
+.thumbnailwrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.videothumbnail {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.devider {
+    width: 100%;
+    outline: none;
+    background-color: rgb(82, 82, 82);
+    border-color: rgb(82, 82, 82);
+    margin: 10px 0 10px 0;
+}
+
+.videotitle {
+    font-size: 14px;
+    color: #ffffff;
+    margin: 5px 10px 5px 10px;
+    text-align: center;
+}
+
+.videoauthor {
+    font-size: 12px;
+    color: #e1e1e1;
+    margin: 15px 10px 5px 10px;
+    text-align: center;
+}
+
+.btntxt2 {
+    display: none;
+    color: #e390a6;
+}
+
+.stream:hover .btntxt1 {
+    display: none;
+}
+
+.stream:hover .btntxt2 {
+    display: block;
+}
+
+.stream:hover .downloadicon {
+    display: block;
+}
+
+.stream:hover::before {
+    display: none;
+}
+
+.downloadicon {
+    width: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 1.3em;
+    margin: auto 0;
+    display: none;
+    color: #eaeaea;
+}
+
+.popup {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+    z-index: 9999;
+}
+
+.popupcontent {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: rgb(49, 49, 60);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.popupcontent h3 {
+    font-size: 16px;
+    color: rgb(221, 182, 197);
+    margin: 0 0 10px 0;
+}
+
+.popupcontent p {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+}
+
+.popupbtns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 10px 0 0 0;
+}
+
+.popupbtns button {
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    padding: 7px 10px 7px 10px;
+    margin: 0 0 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.popupbtns button:nth-child(2) {
+    background-color: rgb(221, 182, 197);
+    color: #000000;
+}
+
+.popupbtns button:nth-child(2):hover {
+    background-color: #e390a6;
+}
+
+@keyframes rotate360 {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.rotate {
+    animation: rotate360 1s linear infinite;
+}
+
+.spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    background-color: rgb(49, 49, 60);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.spinner p {
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(221, 182, 197);
+    margin: 0 0 10px 0;
+}
+
+.spinner-icon {
+    color: #ffffff;
+    margin: 10px 0;
+    animation: rotate360 1s linear infinite;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.error h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+}
+
+.error h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    color: rgb(221, 182, 197);
+}
+
+.error h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0 0 0;
+}
+
+.error ul {
+    font-size: 12px;
+    padding: 0 0 0 25px;
+}
+
+a {
+    color: rgb(221, 182, 197);
+}
