@@ -1,7 +1,7 @@
 on:
     push:
-      branches:
-      - main
+      tags:
+        - 'v*.*.*-*'
 
 name: 🚀 Release on GitHub
 jobs:
@@ -14,15 +14,15 @@ jobs:
     - name: 📎Set Variables
       run: |
         echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        echo ${{env.RELEASE_VERSION}}
+        echo ${{github.ref_name}}
         echo ${{github.event.repository.name}}
 
-    # - name: 📦 Install dependencies
-    #   run: |
-    #     sudo apt install p7zip-full -y
+    - name: 📦 Install dependencies
+      run: |
+        sudo apt install p7zip-full -y
 
-    # - name: 🛠️ Build archives
-    #   run: |
-    #     7z a -tzip ${{github.event.repository.name}}-${{env.RELEASE_VERSION}}-chrome.zip chrome/*
-    #     7z a -tzip ${{github.event.repository.name}}-${{env.RELEASE_VERSION}}-firefox.zip firefox/*
+    - name: 🛠️ Build archives
+      run: |
+        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip chrome/*
+        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip firefox/*
       
