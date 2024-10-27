@@ -1,7 +1,7 @@
 {
     "name": "PytubePP Extension (FOSS)",
     "description": "Download your Favourite YouTube Videos Effortlessly using Pytube Post Processor CLI",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "manifest_version": 3,
     "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtYh/ojyZNQZG4y1oHdBskB8VLz1QE01dhXXzJvAeqnXVa32fyeLG0hT9mRXf9kCwxULhNe90a3y1qagAeUxnyXikre1xFr2Hrzk/MAuFgXLOCBiHZ+nNfzlKzabXoUEkAGHmHOsO57UzzBhcUBeIMtxIhDP3dUIiG9BzyR3ars0TnM1XyQcjG310+jsG3BG5zmim6kHtwURA6dXQjfN+Zu0ocXCh3xWUx7VVYSX8P34uJjF5TTuWEVJZhvwk+VvQbaRKNMfGSryvpdagVPpPWeY/SmAHo78ZU4FiXvbFskUSeHoZRiQKdjHjV4eOvTM/53YqcAxGtlk4N3ZSl80oWQIDAQAB",
     "permissions": ["tabs","storage","nativeMessaging"],

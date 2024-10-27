@@ -1,7 +1,7 @@
 {
     "name": "PytubePP Addon (FOSS)",
     "description": "Download your Favourite YouTube Videos Effortlessly using Pytube Post Processor CLI",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "manifest_version": 2,
     "permissions": [
         "tabs",
