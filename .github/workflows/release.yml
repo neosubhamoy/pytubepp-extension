@@ -17,9 +17,15 @@ jobs:
 
     - name: 🛠️ Build archives
       run: |
-        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip chrome/*
-        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-chromium.zip chromium/*
-        7z a -tzip ${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip firefox/*
+        cd chrome
+        7z a -tzip ../${{github.event.repository.name}}-${{github.ref_name}}-chrome.zip *
+        cd ..
+        cd chromium
+        7z a -tzip ../${{github.event.repository.name}}-${{github.ref_name}}-chromium.zip *
+        cd ..
+        cd firefox
+        7z a -tzip ../${{github.event.repository.name}}-${{github.ref_name}}-firefox.zip *
+        cd ..
 
     - name: 🚀 Release on GitHub
       uses: softprops/action-gh-release@v2
