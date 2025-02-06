@@ -26,9 +26,10 @@ function clearTabInfo(tabId) {
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status === 'complete' && tab.url && tab.url.includes("youtube.com/watch")) {
-        const urlParameters = new URLSearchParams(new URL(tab.url).search);
-        const videoId = urlParameters.get("v");
+    if (changeInfo.status === 'complete' && tab.url && (tab.url.includes("youtube.com/watch") || tab.url.includes("youtube.com/shorts"))) {
+        const videoUrl = new URL(tab.url);
+        const urlParameters = new URLSearchParams(videoUrl.search);
+        const videoId = urlParameters.get("v") || (videoUrl.pathname.startsWith("/shorts/") ? videoUrl.pathname.split("/")[2] : null);
 
         if (videoId) {
             clearTabInfo(tabId).then(() => {
@@ -123,8 +124,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const tab = request.tab;
 
         clearTabInfo(tabId).then(() => {
-            const urlParameters = new URLSearchParams(new URL(tab.url).search);
-            const videoId = urlParameters.get("v");
+            const videoUrl = new URL(tab.url);
+            const urlParameters = new URLSearchParams(videoUrl.search);
+            const videoId = urlParameters.get("v") || (videoUrl.pathname.startsWith("/shorts/") ? videoUrl.pathname.split("/")[2] : null);
 
             if (videoId) {
                 sendMessageToNativeHost({url: `https://www.youtube.com/watch?v=${videoId}`, command: 'send-stream-info', argument: ''})

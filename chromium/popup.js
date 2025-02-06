@@ -21,8 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             `;
         } else if (streamInfo && streamInfo.streams.length > 0) {
-            const urlParameters = new URLSearchParams(new URL(url).search);
-            const videoId = urlParameters.get("v");
+            const videoUrl = new URL(url);
+            const urlParameters = new URLSearchParams(videoUrl.search);
+            const videoId = urlParameters.get("v") || (videoUrl.pathname.startsWith("/shorts/") ? videoUrl.pathname.split("/")[2] : null);
             const videoIdDiv = document.createElement('div');
             videoIdDiv.className = 'videoid';
             videoIdDiv.textContent = `Video ID: ${videoId}`;
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function isYouTubeWatchPage(url) {
-        return url && url.includes("youtube.com/watch");
+        return url && (url.includes("youtube.com/watch") || url.includes("youtube.com/shorts"));
     }
 
     function fetchAndDisplayData(tabId) {

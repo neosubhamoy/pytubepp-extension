@@ -22,9 +22,10 @@ function clearTabInfo(tabId) {
 }
 
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    if (changeInfo.status === 'complete' && tab.url && tab.url.includes("youtube.com/watch")) {
-        var urlParameters = new URLSearchParams(new URL(tab.url).search);
-        var videoId = urlParameters.get("v");
+    if (changeInfo.status === 'complete' && tab.url && (tab.url.includes("youtube.com/watch") || tab.url.includes("youtube.com/shorts"))) {
+        var videoUrl = new URL(tab.url);
+        var urlParameters = new URLSearchParams(videoUrl.search);
+        var videoId = urlParameters.get("v") || (videoUrl.pathname.startsWith("/shorts/") ? videoUrl.pathname.split("/")[2] : null);
 
         if (videoId) {
             clearTabInfo(tabId).then(function() {
@@ -112,8 +113,9 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         var tab = request.tab;
 
         clearTabInfo(tabId).then(function() {
-            var urlParameters = new URLSearchParams(new URL(tab.url).search);
-            var videoId = urlParameters.get("v");
+            var videoUrl = new URL(tab.url);
+            var urlParameters = new URLSearchParams(videoUrl.search);
+            var videoId = urlParameters.get("v") || (videoUrl.pathname.startsWith("/shorts/") ? videoUrl.pathname.split("/")[2] : null);
 
             if (videoId) {
                 sendMessageToNativeHost({url: `https://www.youtube.com/watch?v=${videoId}`, command: 'send-stream-info', argument: ''})
