@@ -149,14 +149,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.appendChild(svg);
                 
                 button.addEventListener('click', () => {
-                    confirmPopup('Are you sure ?', `You want to download ${streamInfo.author + ' - ' + streamInfo.title + '_' + (stream.res !== 'mp3' ? stream.res : 'audio')  + '.' + formatMimeType(stream.mime_type)} it will consume ${formatFileSize(stream.file_size)} of your network bandwidth and disk space.`).then((result) => {
-                        if(result) {
+                    downloadPopup(streamInfo.title, streamInfo.author, stream, streamInfo.captions).then((result) => {
+                        if(result.confirmed) {
                             console.log(`Selected stream: ${stream.res} - ${stream.fps}`);
+                            console.log(`Selected caption: ${result.caption}`);
                             console.log(`For video: ${url}`);
                             showSpinner('Starting');
                             browser.runtime.sendMessage({
                                 action: "downloadStream",
                                 resolution: stream.res,
+                                caption: result.caption,
                                 tabId: tabId
                             }, response => {
                                 hideSpinner();

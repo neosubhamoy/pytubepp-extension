@@ -106,7 +106,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 sendMessageToNativeHost({
                     url: tabData.url,
                     command: 'download-stream',
-                    argument: request.resolution
+                    argument: `${request.resolution} ${request.caption}`
                 }).then(response => {
                     console.log('Download initiated:', response);
                     sendResponse({success: true});

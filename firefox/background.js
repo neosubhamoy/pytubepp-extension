@@ -95,7 +95,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                 sendMessageToNativeHost({
                     url: tabData.url,
                     command: 'download-stream',
-                    argument: request.resolution
+                    argument: `${request.resolution} ${request.caption}`
                 }).then(function(response) {
                     console.log('Download initiated:', response);
                     sendResponse({success: true});

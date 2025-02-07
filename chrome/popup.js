@@ -1,4 +1,4 @@
-import { formatResString, injectBeforeContent, formatFileSize, formatMimeType, formatSecondsToTime, confirmPopup, showSpinner, hideSpinner } from './utils.js';
+import { formatResString, injectBeforeContent, formatFileSize, formatMimeType, formatSecondsToTime, downloadPopup, showSpinner, hideSpinner } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const streamsDiv = document.getElementById('streams');
@@ -58,15 +58,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 <svg class="downloadicon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                 `;
                 button.addEventListener('click', () => {
-                    confirmPopup('Are you sure ?', `You want to download ${streamInfo.author + ' - ' + streamInfo.title + '_' + (stream.res !== 'mp3' ? stream.res : 'audio')  + '.' + formatMimeType(stream.mime_type)} it will consume ${formatFileSize(stream.file_size)} of your network bandwidth and disk space.`).then((result) => {
-                        if(result) {
+                    downloadPopup(streamInfo.title, streamInfo.author, stream, streamInfo.captions).then((result) => {
+                        if(result.confirmed) {
                             console.log(`Selected stream: ${stream.res} - ${stream.fps}`);
+                            console.log(`Selected caption: ${result.caption}`);
                             console.log(`For video: ${url}`);
                             showSpinner('Starting');
                             // Send message to background script to initiate download
                             chrome.runtime.sendMessage({
                                 action: "downloadStream",
                                 resolution: stream.res,
+                                caption: result.caption,
                                 tabId: tabId
                             }, response => {
                                 hideSpinner();

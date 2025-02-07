@@ -360,6 +360,47 @@ background: rgb(221, 182, 197);
     margin: 0 0 10px 0;
 }
 
+.popuplist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.popuplist li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.popuplist li strong {
+    margin-right: 5px;
+}
+
+.popuplisticon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    color: rgb(221, 182, 197);
+}
+
+.captions {
+    width: 100%;
+    margin: 0 0 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(39, 39, 50);
+    color: #ffffff;
+}
+
+.captions:focus {
+    outline: none;
+}
+
+.captionitem {
+    color: #ffffff;
+}
+
 .popupbtns {
     display: flex;
     justify-content: flex-end;

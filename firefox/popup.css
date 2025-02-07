@@ -21,10 +21,15 @@ background: rgb(39, 39, 50);
 background: rgb(221, 182, 197);
 }
 
+strong {
+    font-weight: bold;
+}
+
 .container {
     width: 250px;
     padding: 10px;
 }
+
 
 .root {
     display: flex;
@@ -358,6 +363,53 @@ background: rgb(221, 182, 197);
     font-weight: 300;
     color: #ffffff;
     margin: 0 0 10px 0;
+}
+
+.popuplist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.popuplist li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.popuplist li strong {
+    margin-right: 5px;
+}
+
+.popuplisticon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    color: rgb(221, 182, 197);
+}
+
+.captions {
+    width: 100%;
+    margin: 0 0 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(39, 39, 50);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.captions:focus {
+    outline: none;
+}
+
+.captions:disabled {
+    opacity: 0.5;
+}
+
+.captionitem {
+    color: #ffffff;
 }
 
 .popupbtns {

@@ -91,7 +91,7 @@ function formatMimeType(mimeType) {
     }
 }
 
-function confirmPopup(heading, message) {
+function downloadPopup(title, author, stream, captions) {
     const popup = document.getElementById('popup');
     
     while (popup.firstChild) {
@@ -102,12 +102,194 @@ function confirmPopup(heading, message) {
     popupContent.className = 'popupcontent';
     
     const headingElement = document.createElement('h3');
-    headingElement.textContent = heading;
+    headingElement.textContent = 'Are you sure ?';
     popupContent.appendChild(headingElement);
     
-    const messageElement = document.createElement('p');
-    messageElement.textContent = message;
-    popupContent.appendChild(messageElement);
+    const descriptionElement = document.createElement('p');
+    const descText = document.createTextNode('You want to download ');
+    const titleStrong = document.createElement('strong');
+    titleStrong.textContent = title;
+    const byText = document.createTextNode(' by ');
+    const authorStrong = document.createElement('strong');
+    authorStrong.textContent = author;
+    const formatText = document.createTextNode(' in the following format:');
+    
+    descriptionElement.appendChild(descText);
+    descriptionElement.appendChild(titleStrong);
+    descriptionElement.appendChild(byText);
+    descriptionElement.appendChild(authorStrong);
+    descriptionElement.appendChild(formatText);
+    popupContent.appendChild(descriptionElement);
+    
+    const listElement = document.createElement('ul');
+    listElement.className = 'popuplist';
+    
+    // Resolution/Bitrate list item
+    const resolutionItem = document.createElement('li');
+    const resolutionIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    resolutionIcon.setAttribute('class', 'popuplisticon');
+    resolutionIcon.setAttribute('width', '24');
+    resolutionIcon.setAttribute('height', '24');
+    resolutionIcon.setAttribute('viewBox', '0 0 24 24');
+    resolutionIcon.setAttribute('fill', 'none');
+    resolutionIcon.setAttribute('stroke', 'currentColor');
+    resolutionIcon.setAttribute('stroke-width', '2');
+    resolutionIcon.setAttribute('stroke-linecap', 'round');
+    resolutionIcon.setAttribute('stroke-linejoin', 'round');
+    
+    if (stream.res !== 'mp3') {
+        // Video resolution icon paths
+        const paths = [
+            ['rect', { width: '18', height: '18', x: '3', y: '3', rx: '2' }],
+            ['path', { d: 'M7 3v18' }],
+            ['path', { d: 'M3 7.5h4' }],
+            ['path', { d: 'M3 12h18' }],
+            ['path', { d: 'M3 16.5h4' }],
+            ['path', { d: 'M17 3v18' }],
+            ['path', { d: 'M17 7.5h4' }],
+            ['path', { d: 'M17 16.5h4' }]
+        ];
+        
+        paths.forEach(([elementType, attributes]) => {
+            const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+            Object.entries(attributes).forEach(([attr, value]) => {
+                element.setAttribute(attr, value);
+            });
+            resolutionIcon.appendChild(element);
+        });
+        
+        const resText = document.createElement('strong');
+        resText.textContent = 'Resolution: ';
+        resolutionItem.appendChild(resolutionIcon);
+        resolutionItem.appendChild(resText);
+        resolutionItem.appendChild(document.createTextNode(`${stream.res} ${stream.fps}fps ${stream.is_hdr ? 'HDR' : ''}`));
+    } else {
+        // Audio icon paths
+        const paths = [
+            ['path', { d: 'M9 18V5l12-2v13' }],
+            ['circle', { cx: '6', cy: '18', r: '3' }],
+            ['circle', { cx: '18', cy: '16', r: '3' }]
+        ];
+        
+        paths.forEach(([elementType, attributes]) => {
+            const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+            Object.entries(attributes).forEach(([attr, value]) => {
+                element.setAttribute(attr, value);
+            });
+            resolutionIcon.appendChild(element);
+        });
+        
+        const bitrateText = document.createElement('strong');
+        bitrateText.textContent = 'Bitrate: ';
+        resolutionItem.appendChild(resolutionIcon);
+        resolutionItem.appendChild(bitrateText);
+        resolutionItem.appendChild(document.createTextNode(stream.abitrate));
+    }
+    listElement.appendChild(resolutionItem);
+    
+    // File Format list item
+    const formatItem = document.createElement('li');
+    const formatIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    formatIcon.setAttribute('class', 'popuplisticon');
+    formatIcon.setAttribute('width', '24');
+    formatIcon.setAttribute('height', '24');
+    formatIcon.setAttribute('viewBox', '0 0 24 24');
+    formatIcon.setAttribute('fill', 'none');
+    formatIcon.setAttribute('stroke', 'currentColor');
+    formatIcon.setAttribute('stroke-width', '2');
+    formatIcon.setAttribute('stroke-linecap', 'round');
+    formatIcon.setAttribute('stroke-linejoin', 'round');
+    
+    const formatPaths = stream.res !== 'mp3' ? [
+        ['path', { d: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z' }],
+        ['path', { d: 'M14 2v4a2 2 0 0 0 2 2h4' }],
+        ['path', { d: 'm10 11 5 3-5 3v-6Z' }]
+    ] : [
+        ['path', { d: 'M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v2' }],
+        ['path', { d: 'M14 2v4a2 2 0 0 0 2 2h4' }],
+        ['circle', { cx: '3', cy: '17', r: '1' }],
+        ['path', { d: 'M2 17v-3a4 4 0 0 1 8 0v3' }],
+        ['circle', { cx: '9', cy: '17', r: '1' }]
+    ];
+    
+    formatPaths.forEach(([elementType, attributes]) => {
+        const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+        Object.entries(attributes).forEach(([attr, value]) => {
+            element.setAttribute(attr, value);
+        });
+        formatIcon.appendChild(element);
+    });
+    
+    const formatTextLabel = document.createElement('strong');
+    formatTextLabel.textContent = 'FileFormat: ';
+    formatItem.appendChild(formatIcon);
+    formatItem.appendChild(formatTextLabel);
+    formatItem.appendChild(document.createTextNode(stream.mime_type));
+    listElement.appendChild(formatItem);
+    
+    // File Size list item
+    const sizeItem = document.createElement('li');
+    const sizeIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    sizeIcon.setAttribute('class', 'popuplisticon');
+    sizeIcon.setAttribute('width', '24');
+    sizeIcon.setAttribute('height', '24');
+    sizeIcon.setAttribute('viewBox', '0 0 24 24');
+    sizeIcon.setAttribute('fill', 'none');
+    sizeIcon.setAttribute('stroke', 'currentColor');
+    sizeIcon.setAttribute('stroke-width', '2');
+    sizeIcon.setAttribute('stroke-linecap', 'round');
+    sizeIcon.setAttribute('stroke-linejoin', 'round');
+    
+    const sizePaths = [
+        ['path', { d: 'M12 13v8l-4-4' }],
+        ['path', { d: 'm12 21 4-4' }],
+        ['path', { d: 'M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284' }]
+    ];
+    
+    sizePaths.forEach(([elementType, attributes]) => {
+        const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+        Object.entries(attributes).forEach(([attr, value]) => {
+            element.setAttribute(attr, value);
+        });
+        sizeIcon.appendChild(element);
+    });
+    
+    const sizeText = document.createElement('strong');
+    sizeText.textContent = 'FileSize: ';
+    sizeItem.appendChild(sizeIcon);
+    sizeItem.appendChild(sizeText);
+    sizeItem.appendChild(document.createTextNode(formatFileSize(stream.file_size)));
+    listElement.appendChild(sizeItem);
+    
+    popupContent.appendChild(listElement);
+    
+    const captionText = document.createElement('p');
+    captionText.textContent = stream.res === 'mp3' ? 'Cannot embed caption in mp3' : (captions ? 'Select a caption track to embed:' : 'Caption not available');
+    popupContent.appendChild(captionText);
+    
+    const captionSelect = document.createElement('select');
+    captionSelect.className = 'captions';
+    captionSelect.id = 'captions';
+    captionSelect.disabled = stream.res === 'mp3' || !captions;
+    
+    const noCaptionOption = document.createElement('option');
+    noCaptionOption.className = 'captionitem';
+    noCaptionOption.value = 'none';
+    noCaptionOption.selected = true;
+    noCaptionOption.textContent = 'No Caption';
+    captionSelect.appendChild(noCaptionOption);
+    
+    if (captions) {
+        captions.forEach(caption => {
+            const option = document.createElement('option');
+            option.className = 'captionitem';
+            option.value = caption.code;
+            option.textContent = caption.lang;
+            captionSelect.appendChild(option);
+        });
+    }
+    
+    popupContent.appendChild(captionSelect);
     
     const buttonsContainer = document.createElement('div');
     buttonsContainer.className = 'popupbtns';
@@ -130,11 +312,14 @@ function confirmPopup(heading, message) {
     popup.style.display = 'flex';
     
     return new Promise((resolve) => {
-        const handleClick = (result) => {
+        const handleClick = (confirmed) => {
             popup.style.display = 'none';
             okButton.removeEventListener('click', okClick);
             cancelButton.removeEventListener('click', cancelClick);
-            resolve(result);
+            resolve({
+                confirmed,
+                caption: confirmed ? captionSelect.value : null
+            });
         };
         
         const okClick = () => handleClick(true);
