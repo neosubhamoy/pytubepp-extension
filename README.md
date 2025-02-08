@@ -13,13 +13,14 @@ A Chrome/Firefox Extention/Addon to Download your Favourite YouTube Videos Effor
 ### 💻 Supported Platforms
 
 - Windows 10 (v1803 or later) / 11
-- Linux (Debian / RHEL base) (GNOME only)
-- MacOS (Maybe soon :)
+- Linux (Debian/Ubuntu, Fedora/RHEL base)
+- MacOS (v10.13 or later)
 
 ### 📎 Pre-Requirements
 
 - [Python](https://www.python.org/downloads/) (>=3.8)
 - [FFmpeg](https://www.ffmpeg.org)
+- [Node.js](https://nodejs.org/en/download/)
 - [PytubePP](https://github.com/neosubhamoy/pytubepp)
 - [PytubePP Helper](https://github.com/neosubhamoy/pytubepp-helper) *(Previous requirements can be installed using it)
 
