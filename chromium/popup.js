@@ -1,8 +1,9 @@
-import { formatResString, injectBeforeContent, formatFileSize, formatMimeType, formatSecondsToTime, downloadPopup, showSpinner, hideSpinner } from './utils.js';
+import { formatResString, injectBeforeContent, formatFileSize, formatMimeType, formatSecondsToTime, downloadPopup, showSpinner, hideSpinner, aboutPopup } from './utils.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const streamsDiv = document.getElementById('streams');
     const refreshBtn = document.getElementById('refresh');
+    const titleCont = document.getElementById('titlecont');
 
     function updateUI(streamInfo, url, tabId, error) {
         streamsDiv.innerHTML = "";
@@ -20,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 </ul>
             </div>
             `;
+
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.id = 'popup';
+            streamsDiv.appendChild(popup);
         } else if (streamInfo && streamInfo.streams.length > 0) {
             const videoUrl = new URL(url);
             const urlParameters = new URLSearchParams(videoUrl.search);
@@ -102,6 +108,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 </ul>
             </div>
             `;
+
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.id = 'popup';
+            streamsDiv.appendChild(popup);
         }
     }
 
@@ -131,8 +142,9 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchAndDisplayData(currentTab.id);
             refreshBtn.disabled = false;
         } else {
-            streamsDiv.innerHTML = "<p class='message'>This is not a YouTube watch page</p>";
+            streamsDiv.innerHTML = "<p class='message'>Not a YouTube Watch or Shorts Page</p>";
             refreshBtn.disabled = true;
+            titleCont.style.cursor = "not-allowed";
         }
     });
 
@@ -142,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const refreshIcon = document.getElementById('refresh-icon');
             if (isYouTubeWatchPage(currentTab.url)) {
                 refreshBtn.disabled = true;
+                titleCont.style.cursor = "not-allowed";
                 let rotationTimeout;
                 function startRotation() {
                     refreshIcon.classList.add("rotate");
@@ -162,9 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     refreshBtn.disabled = false;
                     clearTimeout(rotationTimeout);
                     refreshIcon.classList.remove("rotate");
+                    titleCont.style.cursor = "pointer";
                 });
             }
         });
+    });
+
+    titleCont.addEventListener('click', () => {
+        aboutPopup();
     });
 
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

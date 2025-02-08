@@ -51,6 +51,7 @@ strong {
     padding: 10px 20px 10px 20px;
     background-color: rgb(39, 39, 50);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .title {
@@ -432,6 +433,10 @@ strong {
     transition: background-color 0.3s;
 }
 
+.popupbtns button:nth-child(1) {
+    border: 1px solid rgb(221, 182, 197);
+}
+
 .popupbtns button:nth-child(2) {
     background-color: rgb(221, 182, 197);
     color: #000000;
@@ -512,4 +517,101 @@ strong {
 
 a {
     color: rgb(221, 182, 197);
+}
+
+.aboutpopupcontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    background-color: rgb(49, 49, 60);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.abouttitlecont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px 0 20px;
+}
+
+.aboutlogo {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.abouttitle {
+    font-size: 20px;
+    color: rgb(221, 182, 197);
+    margin: 0;
+}
+
+.aboutsubtitle {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.aboutauthor {
+    font-size: 12px;
+    color: rgb(221, 182, 197);
+    margin: 0;
+}
+
+.aboutlist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.aboutlist li {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.abouticons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 15px 0;
+}
+
+.abouticons a {
+    margin: 0 5px 0 5px;
+    border: 1px solid rgb(221, 182, 197);
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.abouticons a svg {
+    width: 16px;
+    height: 16px;
+}
+
+.aboutpopupbtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.aboutclosebtn {
+    background-color: rgb(39, 39, 50);
+    border-radius: 10px;
+    border: 1px solid rgb(221, 182, 197);
+    cursor: pointer;
+    padding: 7px 10px 7px 10px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
 }

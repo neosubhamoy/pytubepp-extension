@@ -157,6 +157,46 @@ export function downloadPopup(title, author, stream, captions) {
     });
 }
 
+export function aboutPopup() {
+    const manifest = chrome.runtime.getManifest();
+    const popup = document.getElementById('popup');
+    popup.innerHTML = `
+    <div class="aboutpopupcontent">
+        <div id="abouttitlecont" class="abouttitlecont">
+            <img id="aboutlogo" class="aboutlogo" src="assets/logo/pytubepp-128.png" alt="logo">
+            <h3 id="abouttitle" class="abouttitle">PytubePP</h3>
+        </div>
+        <p id="aboutsubtitle" class="aboutsubtitle">Extension</p>
+        <p id="aboutauthor" class="aboutauthor">Made with &#10084; by <a href="https://neosubhamoy.com" target="_blank">Subhamoy</a></p>
+        <ul id="aboutlist" class="aboutlist">
+            <li>v${manifest.version}-beta</li>
+            <li><a href="https://github.com/neosubhamoy/pytubepp-extension/blob/main/LICENSE" target="_blank">MIT License</a></li>
+        </ul>
+        <div id="abouticons" class="abouticons">
+            <a href="https://pytubepp.neosubhamoy.com" target="_blank" title="Website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </a>
+            <a href="https://github.com/neosubhamoy/pytubepp-extension" target="_blank" title="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            </a>
+        </div>
+        <div id="aboutpopupbtns" class="aboutpopupbtns">
+            <button id="aboutclosebtn" class="aboutclosebtn">Close</button>
+        </div>
+    </div>
+    `;
+    popup.style.display = 'flex';
+
+    return new Promise((resolve) => {
+        const closeButton = document.getElementById('aboutclosebtn');
+
+        closeButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+            resolve();
+        });
+    });
+}
+
 export function showSpinner(text) {
     const popup = document.getElementById('popup');
     popup.innerHTML = text ? `

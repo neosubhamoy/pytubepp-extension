@@ -330,6 +330,181 @@ function downloadPopup(title, author, stream, captions) {
     });
 }
 
+function aboutPopup() {
+    const manifest = browser.runtime.getManifest();
+    const popup = document.getElementById('popup');
+    
+    // Clear existing content
+    while (popup.firstChild) {
+        popup.removeChild(popup.firstChild);
+    }
+    
+    // Create main container
+    const popupContent = document.createElement('div');
+    popupContent.className = 'aboutpopupcontent';
+    
+    // Create title container
+    const titleContainer = document.createElement('div');
+    titleContainer.id = 'abouttitlecont';
+    titleContainer.className = 'abouttitlecont';
+    
+    // Create and setup logo
+    const logo = document.createElement('img');
+    logo.id = 'aboutlogo';
+    logo.className = 'aboutlogo';
+    logo.src = 'assets/logo/pytubepp-128.png';
+    logo.alt = 'logo';
+    
+    // Create title
+    const title = document.createElement('h3');
+    title.id = 'abouttitle';
+    title.className = 'abouttitle';
+    title.textContent = 'PytubePP';
+    
+    titleContainer.appendChild(logo);
+    titleContainer.appendChild(title);
+    
+    // Create subtitle
+    const subtitle = document.createElement('p');
+    subtitle.id = 'aboutsubtitle';
+    subtitle.className = 'aboutsubtitle';
+    subtitle.textContent = 'Extension';
+    
+    // Create author section
+    const author = document.createElement('p');
+    author.id = 'aboutauthor';
+    author.className = 'aboutauthor';
+    author.innerHTML = 'Made with &#10084; by ';
+    const authorLink = document.createElement('a');
+    authorLink.href = 'https://neosubhamoy.com';
+    authorLink.target = '_blank';
+    authorLink.textContent = 'Subhamoy';
+    author.appendChild(authorLink);
+    
+    // Create version list
+    const list = document.createElement('ul');
+    list.id = 'aboutlist';
+    list.className = 'aboutlist';
+    
+    const versionItem = document.createElement('li');
+    versionItem.textContent = `v${manifest.version}-beta`;
+    
+    const licenseItem = document.createElement('li');
+    const licenseLink = document.createElement('a');
+    licenseLink.href = 'https://github.com/neosubhamoy/pytubepp-extension/blob/main/LICENSE';
+    licenseLink.target = '_blank';
+    licenseLink.textContent = 'MIT License';
+    licenseItem.appendChild(licenseLink);
+    
+    list.appendChild(versionItem);
+    list.appendChild(licenseItem);
+    
+    // Create icons container
+    const iconsContainer = document.createElement('div');
+    iconsContainer.id = 'abouticons';
+    iconsContainer.className = 'abouticons';
+    
+    // Website icon
+    const websiteLink = document.createElement('a');
+    websiteLink.href = 'https://pytubepp.neosubhamoy.com';
+    websiteLink.target = '_blank';
+    websiteLink.title = 'Website';
+    
+    const websiteIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    websiteIcon.setAttribute('width', '24');
+    websiteIcon.setAttribute('height', '24');
+    websiteIcon.setAttribute('viewBox', '0 0 24 24');
+    websiteIcon.setAttribute('fill', 'none');
+    websiteIcon.setAttribute('stroke', 'currentColor');
+    websiteIcon.setAttribute('stroke-width', '2');
+    websiteIcon.setAttribute('stroke-linecap', 'round');
+    websiteIcon.setAttribute('stroke-linejoin', 'round');
+    
+    const websitePaths = [
+        ['circle', { cx: '12', cy: '12', r: '10' }],
+        ['path', { d: 'M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20' }],
+        ['path', { d: 'M2 12h20' }]
+    ];
+    
+    websitePaths.forEach(([elementType, attributes]) => {
+        const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+        Object.entries(attributes).forEach(([attr, value]) => {
+            element.setAttribute(attr, value);
+        });
+        websiteIcon.appendChild(element);
+    });
+    
+    websiteLink.appendChild(websiteIcon);
+    
+    // GitHub icon
+    const githubLink = document.createElement('a');
+    githubLink.href = 'https://github.com/neosubhamoy/pytubepp-extension';
+    githubLink.target = '_blank';
+    githubLink.title = 'GitHub';
+    
+    const githubIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    githubIcon.setAttribute('width', '24');
+    githubIcon.setAttribute('height', '24');
+    githubIcon.setAttribute('viewBox', '0 0 24 24');
+    githubIcon.setAttribute('fill', 'none');
+    githubIcon.setAttribute('stroke', 'currentColor');
+    githubIcon.setAttribute('stroke-width', '2');
+    githubIcon.setAttribute('stroke-linecap', 'round');
+    githubIcon.setAttribute('stroke-linejoin', 'round');
+    
+    const githubPaths = [
+        ['path', { d: 'M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' }],
+        ['path', { d: 'M9 18c-4.51 2-5-2-7-2' }]
+    ];
+    
+    githubPaths.forEach(([elementType, attributes]) => {
+        const element = document.createElementNS('http://www.w3.org/2000/svg', elementType);
+        Object.entries(attributes).forEach(([attr, value]) => {
+            element.setAttribute(attr, value);
+        });
+        githubIcon.appendChild(element);
+    });
+    
+    githubLink.appendChild(githubIcon);
+    
+    iconsContainer.appendChild(websiteLink);
+    iconsContainer.appendChild(githubLink);
+    
+    // Create buttons container
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.id = 'aboutpopupbtns';
+    buttonsContainer.className = 'aboutpopupbtns';
+    
+    const closeButton = document.createElement('button');
+    closeButton.id = 'aboutclosebtn';
+    closeButton.className = 'aboutclosebtn';
+    closeButton.textContent = 'Close';
+    
+    buttonsContainer.appendChild(closeButton);
+    
+    // Append all elements to main container
+    popupContent.appendChild(titleContainer);
+    popupContent.appendChild(subtitle);
+    popupContent.appendChild(author);
+    popupContent.appendChild(list);
+    popupContent.appendChild(iconsContainer);
+    popupContent.appendChild(buttonsContainer);
+    
+    // Add main container to popup
+    popup.appendChild(popupContent);
+    popup.style.display = 'flex';
+    
+    return new Promise((resolve) => {
+        const handleClose = () => {
+            popup.style.display = 'none';
+            closeButton.removeEventListener('click', handleClose);
+            resolve();
+        };
+        
+        closeButton.addEventListener('click', handleClose);
+    });
+}
+
 function showSpinner(text) {
     const popup = document.getElementById('popup');
     
